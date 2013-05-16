@@ -1,0 +1,21 @@
+altscreen on # erase screen when quit apps
+defutf8 on
+defc1 off # treat input chars 128 ~ 159 as control functions
+defflow on
+vbell on
+vbell_msg "Ding Ding!"
+startup_message off
+shell $SHELL
+# 使用 Ctrl+Left & Ctrl+Right 切換
+bindkey ^K prev
+bindkey ^J next
+# encoding
+defencoding utf8
+bind b encoding big5 utf8
+bind u encoding utf8 utf8
+defbce on # erase background with current bg color
+shelltitle "--"
+cjkwidth on
+caption always "%{WK}%-w%<%{=B GK}%n %t%{= KW}%+w%-09="
+hardstatus alwayslastline "%{R}[ %{w}%1` %{R}]%=%{M}%e %{G}%H %{Y} %c %{R} %d/%m/%Y %{K} Load: %l %{w}"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
