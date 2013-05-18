@@ -124,5 +124,12 @@ autocmd filetype tex map <F7> :s/^/% /g<CR> :/asdasdsad<CR>
 autocmd filetype tex map <F8> :s/% //g<CR> :/asdasdsad<CR>
 
 " Hotkey to execute python file
-autocmd filetype python map <F9> :!python %<CR>
+autocmd filetype python map <F9> :w<CR>:!python %<CR>
+" Hotkey to debug python (using pep8)
+autocmd filetype python map <F9> :w<CR>:!pep8 %<CR>
+" Set syntax file for python
+autocmd filetype python set complete+=k~/.vim/syntax/python.vim isk+=.,(
+" Autocompletion of python
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 
