@@ -130,6 +130,9 @@ autocmd filetype python map <F9> :w<CR>:!pep8 %<CR>
 " Set syntax file for python
 autocmd filetype python set complete+=k~/.vim/syntax/python.vim isk+=.,(
 " Autocompletion of python
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete
+autocmd filetype python set omnifunc=pythoncomplete#Complete
+
+" Autocompletion of html
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+
 
