@@ -73,4 +73,5 @@ syntax enable
 " Autocompletion of html
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
-
+" pathogen
+execute pathogen#infect()
