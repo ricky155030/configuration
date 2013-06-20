@@ -77,10 +77,6 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 " pathogen
 execute pathogen#infect()
 
-if has("autocmd")
-    autocmd BufRead *.txt set tw=78
-    autocmd BufReadPost *
-    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-    \   exe "normal g'\"" |
-    \ endif
-endif
+" vim status bar
+set laststatus=2
+let g:Powerline_symbols = 'fancy'
