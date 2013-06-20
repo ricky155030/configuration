@@ -66,7 +66,8 @@ autocmd filetype python set complete+=k~/.vim/syntax/python.vim isk+=.,(
 " Autocompletion of python
 autocmd filetype python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
-let g:pydiction_location='~/.vim/ftplugin/pydiction/complete-dict'
+let g:pydiction_location ='~/.vim/ftplugin/pydiction/complete-dict'
+let g:acp_behaviorSnipmateLength = 1
 filetype plugin on
 syntax enable
 
@@ -75,3 +76,11 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
 " pathogen
 execute pathogen#infect()
+
+if has("autocmd")
+    autocmd BufRead *.txt set tw=78
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal g'\"" |
+    \ endif
+endif
