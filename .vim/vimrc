@@ -78,4 +78,5 @@ execute pathogen#infect()
 
 " vim status bar
 set laststatus=2
-let g:Powerline_symbols = 'fancy'
+" let g:Powerline_symbols = 'fancy'
+nnoremap <silent> <F12> :NERDTree<CR>

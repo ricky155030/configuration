@@ -1,3 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/etc/xdg'
+let g:netrw_dirhist_2='/etc/gconf/gconf.xml.defaults'
+let g:netrw_dirhist_3='/home/hungwei/.config/cairo-dock/current_theme/icons'
+let g:netrw_dirhist_4='/mnt/Data/Software/Office/LibreOffice_4.0.4.2_Linux_x86_deb/readmes'
+let g:netrw_dirhist_5='/home/hungwei/Project/python/RDP'
