@@ -52,7 +52,7 @@ autocmd FileType java set omnifunc=javacomplete#Complete
 autocmd FileType java set completefunc=javacomplete#CompleteParamsInfo 
 
 set laststatus=2		" vim status bar
-" let g:Powerline_symbols = 'fancy'
+let g:airline_powerline_fonts = 1
 
 " vundle check
 let iCanHazVundle=1
@@ -73,10 +73,9 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " git repo
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
 Bundle 'rkulla/pydiction'
 Bundle 'ervandew/supertab'
-Bundle 'Valloric/YouCompleteMe'
 " vim-scripts repo
 Bundle 'javacomplete'
 

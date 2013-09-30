@@ -44,6 +44,7 @@ alias l='ls -CF'
 alias mv='mv -i'
 alias rm='rm -i'
 alias dropbox='~/dropbox.py'
+alias ec2='ssh -i ~/.ssh/hungwei.pem ubuntu@highpoint.twgogo.org'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -60,6 +61,6 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-export CLASSPATH=.:~/Project/java/SSH/jsch-0.1.50.jar:$CLASSPATH;
-export JAVA_HOME=~/Application/jdk1.7.0_25/bin/java;
-export PATH=$PATH:~/Application/jdk1.7.0_25/bin;
+export CLASSPATH=.:$CLASSPATH;
+export JAVA_HOME=~/java/jdk1.7.0_25/bin/java;
+export PATH=$PATH:~/java/jdk1.7.0_25/bin;
