@@ -62,10 +62,5 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 export CLASSPATH=.:$CLASSPATH;
-<<<<<<< HEAD
-export JAVA_HOME=~/java/jdk1.7.0_25/bin/java;
-export PATH=$PATH:~/java/jdk1.7.0_25/bin;
-=======
 export JAVA_HOME=~/Application/jdk1.7.0_40;
 export PATH=$PATH:~/Application/jdk1.7.0_40/bin;
->>>>>>> fd7ab51bce25fb34fda3d022ed5691813eefeb3e

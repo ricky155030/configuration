@@ -87,10 +87,7 @@ Bundle 'gmarik/vundle'
 Bundle 'bling/vim-airline'
 Bundle 'rkulla/pydiction'
 Bundle 'ervandew/supertab'
-<<<<<<< HEAD
-=======
 Bundle 'gerw/vim-latex-suite'
->>>>>>> fd7ab51bce25fb34fda3d022ed5691813eefeb3e
 " vim-scripts repo
 Bundle 'javacomplete'
 Bundle 'AutoComplPop'
