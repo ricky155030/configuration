@@ -60,6 +60,6 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-export CLASSPATH=.:~/Project/java/SSH/jsch-0.1.50.jar:$CLASSPATH;
-export JAVA_HOME=~/Application/jdk1.7.0_25/bin/java;
-export PATH=$PATH:~/Application/jdk1.7.0_25/bin;
+export CLASSPATH=.:$CLASSPATH;
+export JAVA_HOME=~/Application/jdk1.7.0_40;
+export PATH=$PATH:~/Application/jdk1.7.0_40/bin;
