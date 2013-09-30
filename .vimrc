@@ -12,18 +12,13 @@ set autoindent		" always set autoindenting on
 set wildmenu
 
 filetype plugin on
+filetype indent on
 syntax on
 syntax enable
 
 " This is for spell check color 
 hi clear SpellBad
 hi SpellBad term=underline cterm=underline ctermfg=red
-
-" This is for spell check in tex file
-autocmd filetype tex map <F5> :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
-
-" This is line cursor highlight
-autocmd filetype tex map <F6> :set cursorline!<CR><Bar>:echo "Highlight active cursor line: " . strpart("OffOn", 3 * &cursorline, 3)<CR>
 
 " Color scheme
 set t_Co=256
@@ -37,22 +32,38 @@ endif
 
 " map key shortcuts
 imap jj <ESC>						" map 'jj' switch to normal mode
-map <silent> <F6> :s/^/#/g<CR>					" Comment hotkey
-map <silent> <F7> :s/#//g<CR> 					" Comment hotkey
-nnoremap <silent> <F12> :NERDTree<CR>
+nnoremap <silent> <F5> :TlistToggle<cr>
+nnoremap <silent> <F6> :wincmd p<cr>
+" map <silent> <F6> :s/^/#/g<CR>					" Comment hotkey
+" map <silent> <F7> :s/#//g<CR> 					" Comment hotkey
+" nnoremap <silent> <F12> :NERDTree<CR>
 autocmd filetype python map <F9> :w<CR>:!python %<CR>	" Hotkey to execute python file
 autocmd filetype python map <F10> :w<CR>:!pep8 %<CR>	" Hotkey to debug python (using pep8)
+autocmd filetype tex map <F5> :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR> " This is for spell check in tex file
+autocmd filetype tex map <F6> :set cursorline!<CR><Bar>:echo "Highlight active cursor line: " . strpart("OffOn", 3 * &cursorline, 3)<CR> " This is line cursor highlight
+autocmd filetype tex map <silent> <F9> \ll:!echo % \| awk -F "." '{print $1".pdf"}' \| xargs evince <CR>	" Hotkey to view compiled pdf
 
 " completion
 let g:SuperTabDefaultCompletionType = "context"
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 " autocmd Filetype python set complete+=pythoncomplete#Complete
+autocmd FileType c setl omnifunc=ccomplete#Complete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType java set omnifunc=javacomplete#Complete
 autocmd FileType java set completefunc=javacomplete#CompleteParamsInfo 
 
 set laststatus=2		" vim status bar
 let g:airline_powerline_fonts = 1
+
+" for compiling latex
+set shellslash
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+let g:Tex_FormatDependency_pdf = 'dvi,ps,pdf'
+let g:Tex_CompileRule_dvi = 'pdflatex --interaction=nonstopmode $*'
+let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
+let g:Tex_CompileRule_pdf = 'ps2pdf $*.ps'
+let g:Tex_ViewRule_pdf = 'evince'
 
 " vundle check
 let iCanHazVundle=1
@@ -76,6 +87,13 @@ Bundle 'gmarik/vundle'
 Bundle 'bling/vim-airline'
 Bundle 'rkulla/pydiction'
 Bundle 'ervandew/supertab'
+<<<<<<< HEAD
+=======
+Bundle 'gerw/vim-latex-suite'
+>>>>>>> fd7ab51bce25fb34fda3d022ed5691813eefeb3e
 " vim-scripts repo
 Bundle 'javacomplete'
+Bundle 'AutoComplPop'
+Bundle 'ctags.vim'
+Bundle 'taglist.vim'
 
