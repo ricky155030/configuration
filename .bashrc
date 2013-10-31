@@ -46,6 +46,9 @@ alias rm='rm -i'
 alias dropbox='~/dropbox.py'
 alias ec2='ssh -i ~/.ssh/hungwei.pem ubuntu@highpoint.twgogo.org'
 
+#using bash with vi mode
+set -o vi
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
