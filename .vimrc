@@ -33,21 +33,28 @@ if has('mouse')
 endif
 
 " map key shortcuts
-imap jj <ESC>						" map 'jj' switch to normal mode
+imap jj <ESC>						
+" map 'jj' switch to normal mode
 nnoremap <silent> <F5> :TlistToggle<cr>
 nnoremap <silent> <F6> :wincmd p<cr>
-nnoremap <silent> <F12> :NERDTree<CR>
-" map <silent> <F6> :s/^/#/g<CR>					" Comment hotkey
-" map <silent> <F7> :s/#//g<CR> 					" Comment hotkey
-autocmd filetype python map <F9> :w<CR>:!python %<CR>	" Hotkey to execute python file
-autocmd filetype python map <F10> :w<CR>:!pep8 %<CR>	" Hotkey to debug python (using pep8)
-autocmd filetype tex map <F5> :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR> " This is for spell check in tex file
-autocmd filetype tex map <F6> :set cursorline!<CR><Bar>:echo "Highlight active cursor line: " . strpart("OffOn", 3 * &cursorline, 3)<CR> " This is line cursor highlight
-autocmd filetype tex map <silent> <F9> \ll:!echo % \| awk -F "." '{print $1".pdf"}' \| xargs evince <CR>	" Hotkey to view compiled pdf
-autocmd filetype c map <F7> :s/^  /\/\//g<CR>
-autocmd filetype c map <F8> :s/^\/\//  /g<CR>
+nnoremap <silent> <F7> :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+nnoremap <silent> <F12> :NERDTreeToggle<CR>
+autocmd filetype python map <F9> :w<CR>:!python %<CR>
+" Hotkey to execute python file
+autocmd filetype python map <F10> :w<CR>:!pep8 %<CR>	
+" Hotkey to debug python (using pep8)
+autocmd filetype tex map <F8> :set cursorline!<CR><Bar>:echo "Highlight active cursor line: " . strpart("OffOn", 3 * &cursorline, 3)<CR>
+" This is line cursor highlight
+autocmd filetype tex map <silent> <F9> \ll:!echo % \| awk -F "." '{print $1".pdf"}' \| xargs evince <CR>	
+" Hotkey to view compiled pdf
+autocmd filetype c map <F7> :s/^/\/\//g<CR>
+autocmd filetype c map <F8> :s/^\/\///g<CR>
 autocmd filetype c map <F9> :w<CR>:!gcc -lm % && ./a.out<CR>
 autocmd filetype cpp map <F9> :w<CR>:!g++ % && ./a.out<CR>
+autocmd filetype html map <F7> :s/^\(.*\)$/<!--\1-->/g<CR> 
+autocmd filetype html map <F8> :s/^<!--\(.*\)-->$/\1/g<CR>
+autocmd filetype sh map <F7> :s/^/# /g<CR>
+autocmd filetype sh map <F8> :s/^# //g<CR>
 
 " [WEB] Zencoding filetype enable
 autocmd filetype html,css,php EmmetInstall
@@ -115,6 +122,7 @@ Bundle 'javacomplete'
 Bundle 'AutoComplPop'
 Bundle 'ctags.vim'
 Bundle 'taglist.vim'
+Bundle 'verilog_systemverilog.vim'
 
 " snipmate
 Bundle 'MarcWeber/vim-addon-mw-utils'
@@ -128,4 +136,5 @@ Bundle 'othree/html5.vim'
 Bundle '2072/PHP-Indenting-for-VIm'
 " [WEB] Zencoding
 Bundle 'mattn/emmet-vim'
+
 
