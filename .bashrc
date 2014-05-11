@@ -65,5 +65,23 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 export CLASSPATH=.:$CLASSPATH;
-export JAVA_HOME=~/Application/jdk1.7.0_40;
-export PATH=$PATH:~/Application/jdk1.7.0_40/bin;
+
+############# NS2 ##########################################
+#environment values for NS2/NAM
+# LD_LIBRARY_PATH
+OTCL_LIB=/home/ns2/ns-allinone-2.33/otcl-1.13
+NS2_LIB=/home/ns2/ns-allinone-2.33/lib
+X11_LIB=/usr/X11R6/lib
+USR_LOCAL_LIB=/usr/local/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OTCL_LIB:$NS2_LIB:$X11_LIB:$USR_LOCAL_LIB
+# TCL_LIBRARY
+TCL_LIB=/home/ns2/tcl8.4.18/library
+USR_LIB=/usr/lib
+export TCL_LIBRARY=$TCL_LIB:$USR_LIB
+# PATH
+XGRAPH=/home/ns2/ns-allinone-2.33/bin:/home/ns2/ns-allinone-2.33/tcl8.4.18/unix:/home/ns2/ns-allinone-2.33/tk8.4.18/unix
+NS=/home/ns2/ns-allinone-2.33/ns-2.33/
+NAM=/home/ns2/ns-allinone-2.33/nam-1.13/
+export PATH=$PATH:$XGRAPH:$NS:$NAM
+#########################################################
+

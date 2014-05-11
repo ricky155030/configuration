@@ -18,10 +18,6 @@ filetype indent on
 syntax on
 syntax enable
 
-" This is for spell check color 
-hi clear SpellBad
-hi SpellBad term=underline cterm=underline ctermfg=red
-
 " Color scheme
 set t_Co=256
 let python_highlight_all = 1
@@ -32,25 +28,37 @@ if has('mouse')
     set mouse=a
 endif
 
+let spell_auto_type = "tex"
+
 " map key shortcuts
 imap jj <ESC>						
 " map 'jj' switch to normal mode
 nnoremap <silent> <F5> :TlistToggle<cr>
 nnoremap <silent> <F6> :wincmd p<cr>
-nnoremap <silent> <F7> :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 nnoremap <silent> <F12> :NERDTreeToggle<CR>
+nnoremap <S-Q> gT
+nnoremap <S-W> gt 
 autocmd filetype python map <F9> :w<CR>:!python %<CR>
 " Hotkey to execute python file
 autocmd filetype python map <F10> :w<CR>:!pep8 %<CR>	
 " Hotkey to debug python (using pep8)
-autocmd filetype tex map <F8> :set cursorline!<CR><Bar>:echo "Highlight active cursor line: " . strpart("OffOn", 3 * &cursorline, 3)<CR>
-" This is line cursor highlight
-autocmd filetype tex map <silent> <F9> \ll:!echo % \| awk -F "." '{print $1".pdf"}' \| xargs evince <CR>	
+ autocmd filetype tex map <F8> :set cursorline!<CR><Bar>:echo "Highlight active cursor line: " . strpart("OffOn", 3 * &cursorline, 3)<CR>
+" " This is line cursor highlight
+ autocmd filetype tex map <silent> <F9> \ll:!echo % \| awk -F "." '{print $1".pdf"}' \| xargs okular <CR>	
+ autocmd filetype tex map <silent> <F10> :set spell! spelllang=en_us <CR><Bar>:syntax spell toplevel<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+ autocmd filetype tex map <F11> :s/^/% /g<CR>
+ autocmd filetype tex map <F12> :s/^% //g<CR>
+ autocmd filetype tex nmap <S-Q> ]s
+ autocmd filetype tex nmap <S-W> z=
+ autocmd filetype tex nmap <S-E> zg
 " Hotkey to view compiled pdf
 autocmd filetype c map <F7> :s/^/\/\//g<CR>
 autocmd filetype c map <F8> :s/^\/\///g<CR>
 autocmd filetype c map <F9> :w<CR>:!gcc -lm % && ./a.out<CR>
-autocmd filetype cpp map <F9> :w<CR>:!g++ % && ./a.out<CR>
+" autocmd filetype cpp map <F9> :w<CR>:!g++ % && ./a.out<CR>
+autocmd filetype cpp map <F9> :w<CR>:make clean<CR>:make<CR>:!./a.out<CR>
+autocmd filetype cpp map <F7> :s/^/\/\//g<CR>
+autocmd filetype cpp map <F8> :s/^\/\///g<CR>
 autocmd filetype html map <F7> :s/^\(.*\)$/<!--\1-->/g<CR> 
 autocmd filetype html map <F8> :s/^<!--\(.*\)-->$/\1/g<CR>
 autocmd filetype sh map <F7> :s/^/# /g<CR>
@@ -84,6 +92,7 @@ let g:Tex_CompileRule_dvi = 'pdflatex --interaction=nonstopmode $*'
 let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
 let g:Tex_CompileRule_pdf = 'ps2pdf $*.ps'
 let g:Tex_ViewRule_pdf = 'evince'
+let g:tex_comment_nospell = 1
 
 " return last edit location
 if has("autocmd")
@@ -122,7 +131,7 @@ Bundle 'javacomplete'
 Bundle 'AutoComplPop'
 Bundle 'ctags.vim'
 Bundle 'taglist.vim'
-Bundle 'verilog_systemverilog.vim'
+" Bundle 'vimspell'
 
 " snipmate
 Bundle 'MarcWeber/vim-addon-mw-utils'
