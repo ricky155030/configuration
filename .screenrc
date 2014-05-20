@@ -19,3 +19,4 @@ caption always "%{WK}%-w%<%{=B GK}%n %t%{= KW}%+w%-09="
 hardstatus alwayslastline "%{R}[ %{w}%1` %{R}]%=%{M}%e %{G}%H %{Y} %c %{R} %d/%m/%Y %{K} Load: %l %{w}"
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defscrollback 2048
+term xterm

@@ -12,6 +12,7 @@ set smarttab
 set expandtab 		" use space instead of tab
 set autoindent		" always set autoindenting on
 set wildmenu
+set winaltkeys=no
 
 filetype plugin on
 filetype indent on
@@ -44,13 +45,13 @@ autocmd filetype python map <F10> :w<CR>:!pep8 %<CR>
 " Hotkey to debug python (using pep8)
  autocmd filetype tex map <F8> :set cursorline!<CR><Bar>:echo "Highlight active cursor line: " . strpart("OffOn", 3 * &cursorline, 3)<CR>
 " " This is line cursor highlight
- autocmd filetype tex map <silent> <F9> \ll:!echo % \| awk -F "." '{print $1".pdf"}' \| xargs okular <CR>	
- autocmd filetype tex map <silent> <F10> :set spell! spelllang=en_us <CR><Bar>:syntax spell toplevel<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
- autocmd filetype tex map <F11> :s/^/% /g<CR>
- autocmd filetype tex map <F12> :s/^% //g<CR>
- autocmd filetype tex nmap <S-Q> ]s
- autocmd filetype tex nmap <S-W> z=
- autocmd filetype tex nmap <S-E> zg
+autocmd filetype tex map <silent> <F9> \ll:!echo % \| awk -F "." '{print $1".pdf"}' \| xargs okular <CR>	
+autocmd filetype tex map <silent> <F10> :set spell! spelllang=en_us <CR><Bar>:syntax spell toplevel<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+autocmd filetype tex map <F11> :s/^/% /g<CR>
+autocmd filetype tex map <F12> :s/^% //g<CR>
+autocmd filetype tex map <F1> ]s
+autocmd filetype tex map <F2> z=
+autocmd filetype tex map <F3> zg
 " Hotkey to view compiled pdf
 autocmd filetype c map <F7> :s/^/\/\//g<CR>
 autocmd filetype c map <F8> :s/^\/\///g<CR>
