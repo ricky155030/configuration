@@ -43,9 +43,10 @@ autocmd filetype python map <F9> :w<CR>:!python %<CR>
 " Hotkey to execute python file
 autocmd filetype python map <F10> :w<CR>:!pep8 %<CR>	
 " Hotkey to debug python (using pep8)
- autocmd filetype tex map <F8> :set cursorline!<CR><Bar>:echo "Highlight active cursor line: " . strpart("OffOn", 3 * &cursorline, 3)<CR>
+autocmd filetype tex map <F8> :set cursorline!<CR><Bar>:echo "Highlight active cursor line: " . strpart("OffOn", 3 * &cursorline, 3)<CR>
 " " This is line cursor highlight
-autocmd filetype tex map <silent> <F9> \ll:!echo % \| awk -F "." '{print $1".pdf"}' \| xargs okular <CR>	
+" autocmd filetype tex map <silent> <F9> \ll:!echo % \| awk -F "." '{print $1".pdf"}' \| xargs okular <CR>	
+autocmd filetype tex map <silent> <F9> \ll:!echo % \| awk -F "." '{print $1".pdf"}'<CR>	
 autocmd filetype tex map <silent> <F10> :set spell! spelllang=en_us <CR><Bar>:syntax spell toplevel<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
 autocmd filetype tex map <F11> :s/^/% /g<CR>
 autocmd filetype tex map <F12> :s/^% //g<CR>
@@ -64,6 +65,9 @@ autocmd filetype html map <F7> :s/^\(.*\)$/<!--\1-->/g<CR>
 autocmd filetype html map <F8> :s/^<!--\(.*\)-->$/\1/g<CR>
 autocmd filetype sh map <F7> :s/^/# /g<CR>
 autocmd filetype sh map <F8> :s/^# //g<CR>
+autocmd filetype perl map <F7> :s/^/# /g<CR>
+autocmd filetype perl map <F8> :s/^# //g<CR>
+autocmd filetype perl map <F9> :w<CR>:!perl %<CR>
 
 " [WEB] Zencoding filetype enable
 autocmd filetype html,css,php EmmetInstall
@@ -83,6 +87,7 @@ autocmd FileType java set completefunc=javacomplete#CompleteParamsInfo
 
 set laststatus=2		" vim status bar
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " for compiling latex
 set shellslash
@@ -94,6 +99,7 @@ let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
 let g:Tex_CompileRule_pdf = 'ps2pdf $*.ps'
 let g:Tex_ViewRule_pdf = 'evince'
 let g:tex_comment_nospell = 1
+let g:Tex_IgnoredWarnings = 1
 
 " return last edit location
 if has("autocmd")

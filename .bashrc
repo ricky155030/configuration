@@ -44,7 +44,6 @@ alias l='ls -CF'
 alias mv='mv -i'
 alias rm='rm -i'
 alias dropbox='~/dropbox.py'
-alias ec2='ssh -i ~/.ssh/hungwei.pem ubuntu@highpoint.twgogo.org'
 
 #using bash with vi mode
 set -o vi
@@ -53,7 +52,6 @@ set -o vi
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -66,22 +64,14 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 export CLASSPATH=.:$CLASSPATH;
 
-############# NS2 ##########################################
-#environment values for NS2/NAM
-# LD_LIBRARY_PATH
-OTCL_LIB=/home/ns2/ns-allinone-2.33/otcl-1.13
-NS2_LIB=/home/ns2/ns-allinone-2.33/lib
-X11_LIB=/usr/X11R6/lib
-USR_LOCAL_LIB=/usr/local/lib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OTCL_LIB:$NS2_LIB:$X11_LIB:$USR_LOCAL_LIB
-# TCL_LIBRARY
-TCL_LIB=/home/ns2/tcl8.4.18/library
-USR_LIB=/usr/lib
-export TCL_LIBRARY=$TCL_LIB:$USR_LIB
-# PATH
-XGRAPH=/home/ns2/ns-allinone-2.33/bin:/home/ns2/ns-allinone-2.33/tcl8.4.18/unix:/home/ns2/ns-allinone-2.33/tk8.4.18/unix
-NS=/home/ns2/ns-allinone-2.33/ns-2.33/
-NAM=/home/ns2/ns-allinone-2.33/nam-1.13/
-export PATH=$PATH:$XGRAPH:$NS:$NAM
-#########################################################
+test=`/usr/bin/dropbox status`;
+if [ "$test" == "Dropbox isn't running!" ]; then
+    /home/hungwei/.dropbox-dist/dropboxd start &
+fi
 
+export JAVA_HOME=/home/hungwei/jdk1.8.0_20
+export PATH=$PATH:/usr/java/jdk1.8.0_20/bin
+
+PERL_MB_OPT="--install_base \"/home/hungwei/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/hungwei/perl5"; export PERL_MM_OPT;
+PERL5LIB="/home/hungwei/perl5/lib/perl5"; export PERL5LIB;
