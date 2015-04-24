@@ -24,7 +24,7 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set terminal color
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+PS1='${debian_chroot:+($debian_chroot)}\033[01;37m\][\t]\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -43,7 +43,6 @@ alias la='ls -A'
 alias l='ls -CF'
 alias mv='mv -i'
 alias rm='rm -i'
-alias dropbox='~/dropbox.py'
 
 #using bash with vi mode
 set -o vi
@@ -64,14 +63,4 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 export CLASSPATH=.:$CLASSPATH;
 
-test=`/usr/bin/dropbox status`;
-if [ "$test" == "Dropbox isn't running!" ]; then
-    /home/hungwei/.dropbox-dist/dropboxd start &
-fi
-
-export JAVA_HOME=/home/hungwei/jdk1.8.0_20
-export PATH=$PATH:/usr/java/jdk1.8.0_20/bin
-
-PERL_MB_OPT="--install_base \"/home/hungwei/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/hungwei/perl5"; export PERL_MM_OPT;
-PERL5LIB="/home/hungwei/perl5/lib/perl5"; export PERL5LIB;
+screen -rd
