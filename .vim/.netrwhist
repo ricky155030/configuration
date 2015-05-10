@@ -1,4 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/home/hungwei/ns-allinone-2.35/ns-2.35'
-let g:netrw_dirhist_2='/home/hungwei'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/usr/local/lib/python3.4/site-packages/gnureadline-6.3.3-py3.4.egg-info'
