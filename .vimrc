@@ -53,7 +53,7 @@ autocmd filetype c map <F9> :w<CR>:!gcc -lm % && ./a.out<CR>
 autocmd filetype cpp map <F9> :w<CR>:make clean<CR>:make<CR>:!./a.out<CR>
 autocmd filetype sh map <F9> :w<CR>:!bash %<CR>
 autocmd filetype perl map <F9> :w<CR>:!perl %<CR>
-autocmd filetype python map <F9> :w<CR>:!python %<CR>
+autocmd filetype python map <F9> :w<CR>:!`which python3.4` %<CR>
 
 "folding
 set foldenable 
@@ -119,7 +119,7 @@ Bundle 'ervandew/supertab'
 " Bundle 'ctags.vim'
 " Bundle 'taglist.vim'
 " Bundle 'vimspell'
-Bundle 'klen/python-mode'
+" Bundle 'klen/python-mode'
 
 " snipmate
 " Bundle 'MarcWeber/vim-addon-mw-utils'

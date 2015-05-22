@@ -43,6 +43,8 @@ alias la='ls -A'
 alias l='ls -CF'
 alias mv='mv -i'
 alias rm='rm -i'
+alias python='python3.4'
+alias tmux='TERM=xterm-256color tmux -2'
 
 #using bash with vi mode
 set -o vi
@@ -62,8 +64,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 export CLASSPATH=.:$CLASSPATH;
+export PATH=/usr/local/heroku/bin:$PATH;
 
 # set default editor
 export EDITOR='vi'
 
-screen -rd
+# screen -rd

@@ -1,3 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/usr/local/lib/python3.4/site-packages/gnureadline-6.3.3-py3.4.egg-info'
+let g:netrw_dirhist_2='/nfs/django'
+let g:netrw_dirhist_3='/var/log/openvpn'
+let g:netrw_dirhist_4='/home/pi/project/heroku/python-getting-started/gettingstarted'
+let g:netrw_dirhist_5='/home/pi/project/heroku/ptt-beauty/ptt_beauty'
