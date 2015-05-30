@@ -71,3 +71,5 @@ export EDITOR='vi'
 
 # screen -rd
 tmux attach
+
+. ~/.personal

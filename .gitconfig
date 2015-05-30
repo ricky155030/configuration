@@ -1,0 +1,11 @@
+[user]
+	email = hungwei.kao@gmail.com
+	name = HungWei
+[diff]
+	tool = vimdiff
+[difftool]
+	path = /usr/bin/vimdiff
+    prompt = false
+[mergetool]
+	path = /usr/bin/vimdiff
+    prompt = false
