@@ -68,11 +68,3 @@ export PATH=/usr/local/heroku/bin:$PATH;
 
 # set default editor
 export EDITOR='vi'
-<<<<<<< HEAD
-=======
-
-# screen -rd
-tmux attach
-
-. ~/.personal
->>>>>>> e3c92055cc718fb06150b27371e76c5a3b56567f
