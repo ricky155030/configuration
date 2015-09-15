@@ -1,4 +1,9 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               General Config                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 syntax on
+set nocompatible
 set backspace=indent,eol,start
 set ignorecase
 set history=50		" keep 50 lines of command line history
@@ -12,74 +17,138 @@ set softtabstop=4	" set length of tab
 set shiftwidth=4
 set smarttab
 set expandtab 		" use space instead of tab
-set autoindent		" always set autoindenting on
+set copyindent
+set autoindent
+set preserveindent
 set wildmenu
 set winaltkeys=no
 set laststatus=2	" vim status bar
+set hidden
+set completeopt-=preview
+set encoding=utf-8  " Encoding Setting
 
 filetype plugin on
-filetype indent on
+" filetype indent on
 
 " Color scheme
 set t_Co=256
 colorscheme wombat256
-
-" set comment color
 hi Comment ctermfg=red
 
-let python_highlight_all = 1
-
-" general key mapping 
-imap jj <ESC>						
-nnoremap <S-Q> gT
-nnoremap <S-W> gt 
-
-" key mapping for adding comment to code
-autocmd filetype c map <F7> :s/^/\/\//g<CR>
-autocmd filetype c map <F8> :s/^\/\///g<CR>
-autocmd filetype cpp map <F7> :s/^/\/\//g<CR>
-autocmd filetype cpp map <F8> :s/^\/\///g<CR>
-autocmd filetype html map <F7> :s/^\(.*\)$/<!--\1-->/g<CR> 
-autocmd filetype html map <F8> :s/^<!--\(.*\)-->$/\1/g<CR>
-autocmd filetype sh map <F7> :s/^/# /g<CR>
-autocmd filetype sh map <F8> :s/^# //g<CR>
-autocmd filetype perl map <F7> :s/^/# /g<CR>
-autocmd filetype perl map <F8> :s/^# //g<CR>
-autocmd filetype python map <F7> :s/^/# /g<CR>
-autocmd filetype python map <F8> :s/^# //g<CR>
-
-" key mapping for executing code
-autocmd filetype c map <F9> :w<CR>:!gcc -lm % && ./a.out<CR>
-autocmd filetype cpp map <F9> :w<CR>:make clean<CR>:make<CR>:!./a.out<CR>
-autocmd filetype sh map <F9> :w<CR>:!bash %<CR>
-autocmd filetype perl map <F9> :w<CR>:!perl %<CR>
-autocmd filetype python map <F9> :w<CR>:!`which python3.4` %<CR>
-
-"folding
+" folding
 set foldenable 
 autocmd filetype python set foldmethod=indent
 set foldcolumn=0 
 set foldnestmax=2 
 nnoremap <space> za
 
-" other key mapping 
-"" using pep8 to debug python
-" autocmd filetype python map <F10> :w<CR>:!pep8 %<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                Key Mapping                                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" [WEB] let php using html indent
-" autocmd filetype php :set filetype=html
+" general key mapping 
+inoremap jj <ESC>						
+nnoremap <leader>hh <C-w>h
+nnoremap <leader>jj <C-w>j
+nnoremap <leader>kk <C-w>k
+nnoremap <leader>ll <C-w>l
+nnoremap <leader>t  :badd 
+nnoremap <S-Q> :bprev<CR>
+nnoremap <S-W> :bnext<CR>
+nnoremap <leader>q :bdelete<CR>
+nnoremap <leader>s :w<CR>
+nnoremap <leader>[ :lprevious<CR>
+nnoremap <leader>] :lnext<CR>
+nnoremap <F12> :NERDTreeToggle<CR>
 
-" completion
-" let g:SuperTabDefaultCompletionType = "context"
-let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
-" autocmd Filetype python set complete+=pythoncomplete#Complete
-" autocmd FileType c setl omnifunc=ccomplete#Complete
-" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType java set omnifunc=javacomplete#Complete
-" autocmd FileType java set completefunc=javacomplete#CompleteParamsInfo 
+set pastetoggle=<leader>p
 
-" let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1
+" key mapping for adding comment to code
+autocmd filetype c      map <F7> :s/^/\/\//g<CR>
+autocmd filetype c      map <F8> :s/^\/\///g<CR>
+autocmd filetype cpp    map <F7> :s/^/\/\//g<CR>
+autocmd filetype cpp    map <F8> :s/^\/\///g<CR>
+autocmd filetype html   map <F7> :s/^\(.*\)$/<!--\1-->/g<CR>
+autocmd filetype html   map <F8> :s/^<!--\(.*\)-->$/\1/g<CR>
+autocmd filetype sh     map <F7> :s/^/# /g<CR>
+autocmd filetype sh     map <F8> :s/^# //g<CR>
+autocmd filetype perl   map <F7> :s/^/# /g<CR>
+autocmd filetype perl   map <F8> :s/^# //g<CR>
+autocmd filetype python map <F7> :s/^/# /g<CR>
+autocmd filetype python map <F8> :s/^# //g<CR>
+
+" key mapping for executing code
+autocmd filetype c      map <F9> :w<CR>:!gcc -lm % && ./a.out<CR>
+autocmd filetype cpp    map <F9> :w<CR>:make clean<CR>:make<CR>:!./a.out<CR>
+autocmd filetype sh     map <F9> :w<CR>:!bash %<CR>
+autocmd filetype perl   map <F9> :w<CR>:!perl %<CR>
+autocmd filetype python map <F9> :w<CR>:!`which python3.4` %<CR>
+
+" add filetype
+autocmd BufRead,BufNewFile *.js setlocal filetype=javascript.javascript-angular
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                            Plugin Confiuration                             "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Jedi
+let g:jedi#completions_enabled                      = 0
+
+" YouCompleteMe
+let g:ycm_min_num_of_chars_for_completion           = 3
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_key_list_select_completion                = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion              = ['<C-p>', '<Up>']
+let g:ycm_use_ultisnips_completer                   = 1
+let g:ycm_filetype_blacklist                        = {
+      \ 'tagbar' : 1,
+      \ 'qf' : 1,
+      \ 'notes' : 1,
+      \ 'markdown' : 1,
+      \ 'unite' : 1,
+      \ 'text' : 1,
+      \ 'vimwiki' : 1,
+      \ 'gitcommit' : 1,
+      \}
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger       = "<Tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<C-n>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-p>"
+
+" Airline
+let g:airline#extensions#tabline#enabled  = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#hunks#enabled    = 1
+let g:airline#extensions#branch#enabled   = 1
+let g:airline_powerline_fonts             = 1
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list            = 1
+let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_wq              = 0
+let g:syntastic_python_checkers          = ['pylint']
+let g:syntastic_html_checkers            = ['tidy']
+let g:syntastic_javascript_checkers      = ['jshint']
+
+" Ternjs
+let g:tern_show_argument_hints   = 'on_move'
+let g:tern_show_signature_in_pum = 1
+
+" GitGutter
+let g:gitgutter_realtime         = 1
+let g:gitgutter_eager            = 1
+
+" Javascript-libraries-syntax
+let g:used_javascript_libs       = 'angularjs'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   Others                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " return last edit location
 if has("autocmd")
@@ -91,63 +160,44 @@ if has("autocmd")
 endif
 
 " vundle check
-" let iCanHazVundle=1
-" let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-" if !filereadable(vundle_readme)
-"     echo "Installing Vundle.."
-"     echo ""
-"     silent !mkdir -p ~/.vim/bundle
-"     silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-"     let iCanHazVundle=0
-" endif
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+    echo "Installing Vundle.."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let iCanHazVundle=0
+endif
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Plugins                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " git repo
-" Bundle 'bling/vim-airline'
-Bundle 'rkulla/pydiction'
-Bundle 'ervandew/supertab'
-" Bundle 'gerw/vim-latex-suite'
-" Bundle 'scrooloose/nerdtree'
-" Bundle 'javacomplete'
-" Bundle 'AutoComplPop'
-" Bundle 'ctags.vim'
-" Bundle 'taglist.vim'
-" Bundle 'vimspell'
-" Bundle 'klen/python-mode'
+Plugin 'bling/vim-airline'
+" Plugin 'ervandew/supertab'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'godlygeek/tabular'
+Plugin 'tpope/vim-fugitive'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'burnettk/vim-angular'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'scrooloose/nerdtree'
 
-" snipmate
-" Bundle 'MarcWeber/vim-addon-mw-utils'
-" Bundle 'tomtom/tlib_vim'
-" Bundle 'garbas/vim-snipmate'
-" Bundle 'honza/vim-snippets'
+" Syntax
+Plugin 'scrooloose/syntastic'
+Plugin 'othree/javascript-libraries-syntax.vim'
 
-
-""" THE FOLLOWING IS DEPRECATED """
-
-"" vim setting for latex
-" let spell_auto_type = "tex"
-" autocmd filetype tex map <F8> :set cursorline!<CR><Bar>:echo "Highlight active cursor line: " . strpart("OffOn", 3 * &cursorline, 3)<CR>
-" autocmd filetype tex map <silent> <F9> \ll:!echo % \| awk -F "." '{print $1".pdf"}'<CR>	
-" autocmd filetype tex map <silent> <F10> :set spell! spelllang=en_us <CR><Bar>:syntax spell toplevel<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
-" autocmd filetype tex map <F11> :s/^/% /g<CR>
-" autocmd filetype tex map <F12> :s/^% //g<CR>
-" autocmd filetype tex map <F1> ]s
-" autocmd filetype tex map <F2> z=
-" autocmd filetype tex map <F3> zg
-"" for compiling latex
-" set shellslash
-" set grepprg=grep\ -nH\ $*
-" let g:tex_flavor='latex'
-" let g:Tex_FormatDependency_pdf = 'dvi,ps,pdf'
-" let g:Tex_CompileRule_dvi = 'pdflatex --interaction=nonstopmode $*'
-" let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
-" let g:Tex_CompileRule_pdf = 'ps2pdf $*.ps'
-" let g:Tex_ViewRule_pdf = 'evince'
-" let g:tex_comment_nospell = 1
-" let g:Tex_IgnoredWarnings = 1
+" Snippet
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
