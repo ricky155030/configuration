@@ -33,6 +33,7 @@ filetype plugin on
 " Color scheme
 set t_Co=256
 colorscheme wombat256
+set background=light
 hi Comment ctermfg=red
 
 " folding
@@ -104,7 +105,6 @@ let g:ycm_filetype_blacklist                        = {
       \ 'tagbar' : 1,
       \ 'qf' : 1,
       \ 'notes' : 1,
-      \ 'markdown' : 1,
       \ 'unite' : 1,
       \ 'text' : 1,
       \ 'vimwiki' : 1,
@@ -145,6 +145,13 @@ let g:gitgutter_eager            = 1
 
 " Javascript-libraries-syntax
 let g:used_javascript_libs       = 'angularjs'
+
+" MultipleCursors
+let g:multi_cursor_exit_from_insert_mode = 0
+
+" IndentLine
+let g:indentLine_color_term = 8
+let g:indentLine_char = '¦'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Others                                   "
@@ -193,6 +200,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'burnettk/vim-angular'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Yggdroot/indentLine'
 
 " Syntax
 Plugin 'scrooloose/syntastic'
