@@ -44,26 +44,52 @@ set foldnestmax=2
 nnoremap <space> za
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                 Functions                                  "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:background_opacity = 1
+
+function BackgroundToggle()
+    echo "execute"
+    if ! exists("g:background_opacity")
+        return
+    endif
+
+
+    if g:background_opacity
+        execute "highlight Normal ctermbg=none"
+        execute "highlight LineNr ctermbg=none"
+    else
+        execute "highlight Normal ctermbg=234"
+        execute "highlight LineNr ctermbg=232"
+    endif
+
+    let g:background_opacity = !g:background_opacity
+endfunction
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Key Mapping                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let mapleader = "\<C-c>"
 
 " general key mapping 
-inoremap jj <ESC>						
-nnoremap <leader>hh <C-w>h
-nnoremap <leader>jj <C-w>j
-nnoremap <leader>kk <C-w>k
-nnoremap <leader>ll <C-w>l
-nnoremap <leader>t  :badd 
-nnoremap <S-Q> :bprev<CR>
-nnoremap <S-W> :bnext<CR>
-nnoremap <leader>q :bdelete<CR>
-nnoremap <leader>s :w<CR>
-nnoremap <leader>[ :lprevious<CR>
-nnoremap <leader>] :lnext<CR>
-nnoremap <F12> :NERDTreeToggle<CR>
-nnoremap <F11> :GitGutterLineHighlightsToggle<CR>
+inoremap   jj           <ESC>
+nnoremap   <leader>hh   <C-w>h
+nnoremap   <leader>jj   <C-w>j
+nnoremap   <leader>kk   <C-w>k
+nnoremap   <leader>ll   <C-w>l
+nnoremap   <leader>t    :badd
+nnoremap   <S-Q>        :bprev<CR>
+nnoremap   <S-W>        :bnext<CR>
+nnoremap   <leader>q    :bdelete<CR>
+nnoremap   <leader>s    :w<CR>
+nnoremap   <leader>[    :lprevious<CR>
+nnoremap   <leader>]    :lnext<CR>
+nnoremap   <F12>        :NERDTreeToggle<CR>
+nnoremap   <F10>        :GitGutterLineHighlightsToggle<CR>
+nnoremap   <leader>b    :call BackgroundToggle()<CR>
 
 set pastetoggle=<leader>p
 
@@ -89,14 +115,18 @@ autocmd filetype perl   map <F9> :w<CR>:!perl %<CR>
 autocmd filetype python map <F9> :w<CR>:!`which python3.4` %<CR>
 
 " add filetype for Utilsnip
-autocmd BufRead,BufNewFile *.js :UltiSnipsAddFiletypes javascript-angular|:UltiSnipsAddFiletypes javascript
-autocmd BufRead,BufNewFile *.html :UltiSnipsAddFiletypes html
-autocmd BufRead,BufNewFile *.css :UltiSnipsAddFiletypes css
-autocmd BufRead,BufNewFile *.py :UltiSnipsAddFiletypes python
+autocmd FileType javascript :UltiSnipsAddFiletypes javascript-angular | :UltiSnipsAddFiletypes javascript
+autocmd FileType html :UltiSnipsAddFiletypes html
+autocmd FileType css :UltiSnipsAddFiletypes css
+autocmd FileType python :UltiSnipsAddFiletypes python
 
 " exclude from buffer next or prev
 autocmd FileType qf set nobuflisted
 autocmd FileType ll set nobuflisted
+
+" set different indent style
+autocmd FileType javascript setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
+autocmd FileType html setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            Plugin Confiuration                             "
