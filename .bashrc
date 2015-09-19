@@ -63,8 +63,7 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-export CLASSPATH=.:$CLASSPATH;
-export PATH=/usr/local/heroku/bin:$PATH;
 
-# set default editor
 export EDITOR='vi'
+
+source ~/.personal

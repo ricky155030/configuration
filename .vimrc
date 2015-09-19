@@ -47,6 +47,8 @@ nnoremap <space> za
 "                                Key Mapping                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let mapleader = "\<C-c>"
+
 " general key mapping 
 inoremap jj <ESC>						
 nnoremap <leader>hh <C-w>h
@@ -61,6 +63,7 @@ nnoremap <leader>s :w<CR>
 nnoremap <leader>[ :lprevious<CR>
 nnoremap <leader>] :lnext<CR>
 nnoremap <F12> :NERDTreeToggle<CR>
+nnoremap <F11> :GitGutterLineHighlightsToggle<CR>
 
 set pastetoggle=<leader>p
 
@@ -85,8 +88,15 @@ autocmd filetype sh     map <F9> :w<CR>:!bash %<CR>
 autocmd filetype perl   map <F9> :w<CR>:!perl %<CR>
 autocmd filetype python map <F9> :w<CR>:!`which python3.4` %<CR>
 
-" add filetype
-autocmd BufRead,BufNewFile *.js setlocal filetype=javascript.javascript-angular
+" add filetype for Utilsnip
+autocmd BufRead,BufNewFile *.js :UltiSnipsAddFiletypes javascript-angular|:UltiSnipsAddFiletypes javascript
+autocmd BufRead,BufNewFile *.html :UltiSnipsAddFiletypes html
+autocmd BufRead,BufNewFile *.css :UltiSnipsAddFiletypes css
+autocmd BufRead,BufNewFile *.py :UltiSnipsAddFiletypes python
+
+" exclude from buffer next or prev
+autocmd FileType qf set nobuflisted
+autocmd FileType ll set nobuflisted
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            Plugin Confiuration                             "
@@ -131,6 +141,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list            = 1
 let g:syntastic_check_on_open            = 1
 let g:syntastic_check_on_wq              = 0
+let g:syntastic_loc_list_height          = 5
 let g:syntastic_python_checkers          = ['pylint']
 let g:syntastic_html_checkers            = ['tidy']
 let g:syntastic_javascript_checkers      = ['jshint']
@@ -201,6 +212,8 @@ Plugin 'burnettk/vim-angular'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
+Plugin 'tpope/vim-surround'
+Plugin 'rking/ag.vim'
 
 " Syntax
 Plugin 'scrooloose/syntastic'
