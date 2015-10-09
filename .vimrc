@@ -125,9 +125,14 @@ autocmd FileType python :UltiSnipsAddFiletypes python
 autocmd FileType qf set nobuflisted
 autocmd FileType ll set nobuflisted
 
+" set filetypes
+autocmd BufNewFile,BufRead *.less set filetype=less
+
 " set different indent style
 autocmd FileType javascript setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
 autocmd FileType html setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
+autocmd FileType css setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
+autocmd FileType less setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            Plugin Confiuration                             "
@@ -246,6 +251,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-surround'
 Plugin 'rking/ag.vim'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'groenewege/vim-less'
 
 " Syntax
 Plugin 'scrooloose/syntastic'
