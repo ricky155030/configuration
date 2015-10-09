@@ -80,7 +80,7 @@ nnoremap   <leader>hh   <C-w>h
 nnoremap   <leader>jj   <C-w>j
 nnoremap   <leader>kk   <C-w>k
 nnoremap   <leader>ll   <C-w>l
-nnoremap   <leader>t    :badd
+nnoremap   <leader>t    :badd 
 nnoremap   <S-Q>        :bprev<CR>
 nnoremap   <S-W>        :bnext<CR>
 nnoremap   <leader>q    :bdelete<CR>
@@ -89,6 +89,7 @@ nnoremap   <leader>[    :lprevious<CR>
 nnoremap   <leader>]    :lnext<CR>
 nnoremap   <F12>        :NERDTreeToggle<CR>
 nnoremap   <F10>        :GitGutterLineHighlightsToggle<CR>
+nnoremap   <F5>         :SyntasticToggleMode<CR>
 nnoremap   <leader>b    :call BackgroundToggle()<CR>
 
 set pastetoggle=<leader>p
@@ -169,7 +170,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_open            = 0
 let g:syntastic_check_on_wq              = 0
 let g:syntastic_loc_list_height          = 5
 let g:syntastic_python_checkers          = ['pylint']
@@ -244,6 +245,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-surround'
 Plugin 'rking/ag.vim'
+Plugin 'jiangmiao/auto-pairs'
 
 " Syntax
 Plugin 'scrooloose/syntastic'
