@@ -119,6 +119,7 @@ autocmd filetype python map <F9> :w<CR>:!`which python3.4` %<CR>
 autocmd FileType javascript :UltiSnipsAddFiletypes javascript-angular | :UltiSnipsAddFiletypes javascript
 autocmd FileType html :UltiSnipsAddFiletypes html
 autocmd FileType css :UltiSnipsAddFiletypes css
+autocmd FileType less :UltiSnipsAddFiletypes css
 autocmd FileType python :UltiSnipsAddFiletypes python
 
 " exclude from buffer next or prev
