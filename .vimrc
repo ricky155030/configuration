@@ -171,17 +171,17 @@ let g:airline#extensions#branch#enabled   = 1
 let g:airline_powerline_fonts             = 1
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 0
-let g:syntastic_check_on_wq              = 0
-let g:syntastic_loc_list_height          = 5
-let g:syntastic_python_checkers          = ['pylint']
-let g:syntastic_html_checkers            = ['tidy']
-let g:syntastic_javascript_checkers      = ['jshint']
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list            = 1
+" let g:syntastic_check_on_open            = 0
+" let g:syntastic_check_on_wq              = 0
+" let g:syntastic_loc_list_height          = 5
+" let g:syntastic_python_checkers          = ['pylint']
+" let g:syntastic_html_checkers            = ['tidy']
+" let g:syntastic_javascript_checkers      = ['jshint']
 
 " Ternjs
 let g:tern_show_argument_hints   = 'on_move'

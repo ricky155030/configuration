@@ -89,7 +89,8 @@ bindkey -M viins 'jj' vi-cmd-mode
 bindkey '^r' history-incremental-search-backward
 
 # Aliases
-alias tmux='TERM=xterm-256color tmux -2 new-session -n ""'
+alias tmux='TERM=xterm-256color tmux -2'
+alias tmux_new='TERM=xterm-256color tmux -2 new-session -n ""'
 
 # Editor
 export EDITOR='vim'
