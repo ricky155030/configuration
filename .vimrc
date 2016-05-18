@@ -2,7 +2,7 @@
 "                               General Config                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-syntax on
+syntax enable
 set nocompatible
 set backspace=indent,eol,start
 set ignorecase
@@ -28,13 +28,16 @@ set completeopt-=preview
 set encoding=utf-8  " Encoding Setting
 
 filetype plugin on
-" filetype indent on
+filetype indent on
 
 " Color scheme
 set t_Co=256
 colorscheme wombat256
 set background=light
 hi Comment ctermfg=red
+" syntax enable
+" colorscheme solarized
+" set background=dark
 
 " folding
 set foldenable 
@@ -54,7 +57,6 @@ function BackgroundToggle()
     if ! exists("g:background_opacity")
         return
     endif
-
 
     if g:background_opacity
         execute "highlight Normal ctermbg=none"
@@ -116,11 +118,11 @@ autocmd filetype perl   map <F9> :w<CR>:!perl %<CR>
 autocmd filetype python map <F9> :w<CR>:!`which python3.4` %<CR>
 
 " add filetype for Utilsnip
-autocmd FileType javascript :UltiSnipsAddFiletypes javascript-angular | :UltiSnipsAddFiletypes javascript
-autocmd FileType html :UltiSnipsAddFiletypes html
-autocmd FileType css :UltiSnipsAddFiletypes css
-autocmd FileType less :UltiSnipsAddFiletypes css
-autocmd FileType python :UltiSnipsAddFiletypes python
+autocmd FileType javascript :UltiSnipsAddFiletypes javascript
+autocmd FileType html       :UltiSnipsAddFiletypes html
+autocmd FileType css        :UltiSnipsAddFiletypes css
+autocmd FileType less       :UltiSnipsAddFiletypes css
+autocmd FileType python     :UltiSnipsAddFiletypes python
 
 " exclude from buffer next or prev
 autocmd FileType qf set nobuflisted
@@ -128,6 +130,7 @@ autocmd FileType ll set nobuflisted
 
 " set filetypes
 autocmd BufNewFile,BufRead *.less set filetype=less
+autocmd BufNewFile,BufRead *.js set filetype=javascript
 
 " set different indent style
 autocmd FileType javascript setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
@@ -143,7 +146,7 @@ autocmd FileType less setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shi
 let g:jedi#completions_enabled                      = 0
 
 " YouCompleteMe
-let g:ycm_min_num_of_chars_for_completion           = 3
+let g:ycm_min_num_of_chars_for_completion           = 2
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_key_list_select_completion                = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion              = ['<C-p>', '<Up>']
@@ -171,19 +174,20 @@ let g:airline#extensions#branch#enabled   = 1
 let g:airline_powerline_fonts             = 1
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 0
-let g:syntastic_check_on_wq              = 0
-let g:syntastic_loc_list_height          = 5
-let g:syntastic_python_checkers          = ['pylint']
-let g:syntastic_html_checkers            = ['tidy']
-let g:syntastic_javascript_checkers      = ['jshint']
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list            = 1
+" let g:syntastic_check_on_open            = 0
+" let g:syntastic_check_on_wq              = 0
+" let g:syntastic_loc_list_height          = 5
+" let g:syntastic_python_checkers          = ['pylint']
+" let g:syntastic_html_checkers            = ['tidy']
+" let g:syntastic_javascript_checkers      = ['jshint']
 
 " Ternjs
+let tern#is_show_argument_hints_enabled = 1
 let g:tern_show_argument_hints   = 'on_move'
 let g:tern_show_signature_in_pum = 1
 
@@ -192,7 +196,8 @@ let g:gitgutter_realtime         = 1
 let g:gitgutter_eager            = 1
 
 " Javascript-libraries-syntax
-let g:used_javascript_libs       = 'angularjs'
+let g:used_javascript_libs       = 'jquery,react'
+set omnifunc=syntaxcomplete#Complete
 
 " MultipleCursors
 let g:multi_cursor_exit_from_insert_mode = 0
@@ -200,6 +205,9 @@ let g:multi_cursor_exit_from_insert_mode = 0
 " IndentLine
 let g:indentLine_color_term = 8
 let g:indentLine_char = '¦'
+
+" JSX
+let g:jsx_ext_required = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Others                                   "
@@ -231,33 +239,39 @@ call vundle#rc()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  Plugins                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " let Vundle manage Vundle
 " required! 
 Plugin 'gmarik/vundle'
 
 " git repo
 Plugin 'bling/vim-airline'
-" Plugin 'ervandew/supertab'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'davidhalter/jedi-vim'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-fugitive'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'burnettk/vim-angular'
-Plugin 'marijnh/tern_for_vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
-Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'             " Click ds, ysiw, cs to change surrounding quotation
 Plugin 'rking/ag.vim'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'groenewege/vim-less'
+" Plugin 'groenewege/vim-less'
+
+" AutoComplete
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'davidhalter/jedi-vim'           " auto complete for python
+Plugin 'marijnh/tern_for_vim'           " auto complete for javascript
 
 " Syntax
-Plugin 'scrooloose/syntastic'
 Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'othree/yajs.git'
+Plugin 'mxw/vim-jsx'
 
 " Snippet
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'justinj/vim-react-snippets'
+
+" Indent
+Plugin 'gavocanov/vim-js-indent'
+
