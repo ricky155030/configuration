@@ -24,8 +24,10 @@ set wildmenu
 set winaltkeys=no
 set laststatus=2	" vim status bar
 set hidden
-set completeopt-=preview
+set completeopt=menu,longest
 set encoding=utf-8  " Encoding Setting
+set pastetoggle=<F5>
+set scrolloff=7
 
 filetype plugin on
 filetype indent on
@@ -52,7 +54,7 @@ nnoremap <space> za
 
 let g:background_opacity = 1
 
-function BackgroundToggle()
+function ChangeBackground()
     echo "execute"
     if ! exists("g:background_opacity")
         return
@@ -89,12 +91,34 @@ nnoremap   <leader>q    :bdelete<CR>
 nnoremap   <leader>s    :w<CR>
 nnoremap   <leader>[    :lprevious<CR>
 nnoremap   <leader>]    :lnext<CR>
-nnoremap   <F12>        :NERDTreeToggle<CR>
+nnoremap   <leader>b    :call ChangeBackground()<CR>
 nnoremap   <F10>        :GitGutterLineHighlightsToggle<CR>
-nnoremap   <F5>         :SyntasticToggleMode<CR>
-nnoremap   <leader>b    :call BackgroundToggle()<CR>
+nnoremap   <F12>        :NERDTreeToggle<CR>
 
-set pastetoggle=<leader>p
+" Mapping for swap line cursor moving
+nnoremap   k            gk
+nnoremap   gk           k
+nnoremap   j            gj
+nnoremap   gj           j
+
+" Keep search pattern at the center of the screen.
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+
+" y$ -> Y Make Y behave like other capitals
+map Y y$
+
+" remap U to <C-r> for easier redo
+nnoremap U <C-r>
+
+" exchange #/* function
+nnoremap * #
+nnoremap # *
+
+nnoremap <silent><leader>/ :nohls<CR>
 
 " key mapping for adding comment to code
 autocmd filetype c      map <F7> :s/^/\/\//g<CR>
@@ -133,13 +157,13 @@ autocmd BufNewFile,BufRead *.less set filetype=less
 autocmd BufNewFile,BufRead *.js set filetype=javascript
 
 " set different indent style
-autocmd FileType javascript setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
-autocmd FileType html setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
-autocmd FileType css setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
-autocmd FileType less setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
+autocmd FileType javascript,html,css,less set tabstop=2 softtabstop=2 shiftwidth=2
+
+" reload .vimrc since it has been modified
+autocmd! bufwritepost .vimrc source %"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                            Plugin Confiuration                             "
+"                            Plugin Configuration                            "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Jedi
@@ -209,6 +233,68 @@ let g:indentLine_char = '¦'
 " JSX
 let g:jsx_ext_required = 0
 
+" Easy align
+vmap <Leader>a <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+if !exists('g:easy_align_delimiters')
+  let g:easy_align_delimiters = {}
+endif
+let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String']  }
+
+" NerdCommenter
+" Add a space before comment
+let g:NERDSpaceDelims=1
+
+" Rainbow Parentheses
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" CtrlP
+let g:ctrlp_map = '<leader>p'
+let g:ctrlp_cmd = 'CtrlP'
+map <leader>f :CtrlPMRU<CR>
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
+
+" Easy Motion
+let g:EasyMotion_smartcase = 1
+map <Leader><leader>h <Plug>(easymotion-linebackward)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+map <Leader><leader>l <Plug>(easymotion-lineforward)
+" 重复上一次操作, 类似repeat插件, 很强大
+map <Leader><leader>. <Plug>(easymotion-repeat)
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Others                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -245,7 +331,6 @@ Plugin 'gmarik/vundle'
 
 " git repo
 Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-fugitive'
@@ -253,9 +338,14 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-surround'             " Click ds, ysiw, cs to change surrounding quotation
+Plugin 'tpope/vim-repeat'               " Use with vim-surround
 Plugin 'rking/ag.vim'
 Plugin 'jiangmiao/auto-pairs'
-" Plugin 'groenewege/vim-less'
+Plugin 'kien/ctrlp.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'junegunn/vim-easy-align'
 
 " AutoComplete
 Plugin 'Valloric/YouCompleteMe'
