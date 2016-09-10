@@ -187,8 +187,8 @@ let g:ycm_filetype_blacklist                        = {
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger       = "<Tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<C-n>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-p>"
+let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 
 " Airline
 let g:airline#extensions#tabline#enabled  = 1
@@ -212,7 +212,7 @@ let g:airline_powerline_fonts             = 1
 
 " Ternjs
 let tern#is_show_argument_hints_enabled = 1
-let g:tern_show_argument_hints   = 'on_move'
+let g:tern_show_argument_hints   = 'on_hold'
 let g:tern_show_signature_in_pum = 1
 
 " GitGutter
