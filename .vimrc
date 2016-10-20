@@ -28,6 +28,8 @@ set completeopt=menu,longest
 set encoding=utf-8  " Encoding Setting
 set pastetoggle=<F5>
 set scrolloff=7
+set whichwrap+=<,>,h,l  " add <,>,h,l to move over lines
+set shiftround      " When use <,> to indent line, the width will be multiple of shiftwidth
 
 filetype plugin on
 filetype indent on
@@ -44,9 +46,10 @@ hi Comment ctermfg=red
 " folding
 set foldenable 
 autocmd filetype python set foldmethod=indent
-set foldcolumn=0 
-set foldnestmax=2 
-nnoremap <space> za
+autocmd filetype javascript set foldmethod=syntax
+set foldcolumn=0
+set foldnestmax=2
+set foldlevel=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Functions                                  "
@@ -120,6 +123,10 @@ nnoremap # *
 
 nnoremap <silent><leader>/ :nohls<CR>
 
+" key mapping for folding
+nnoremap <space> za
+nnoremap <leader><space> zm
+
 " key mapping for adding comment to code
 autocmd filetype c      map <F7> :s/^/\/\//g<CR>
 autocmd filetype c      map <F8> :s/^\/\///g<CR>
@@ -141,6 +148,10 @@ autocmd filetype sh     map <F9> :w<CR>:!bash %<CR>
 autocmd filetype perl   map <F9> :w<CR>:!perl %<CR>
 autocmd filetype python map <F9> :w<CR>:!`which python3.4` %<CR>
 
+" set filetypes
+autocmd BufNewFile,BufRead *.less set filetype=less
+autocmd BufNewFile,BufRead *.js set filetype=javascript
+
 " add filetype for Utilsnip
 autocmd FileType javascript :UltiSnipsAddFiletypes javascript
 autocmd FileType html       :UltiSnipsAddFiletypes html
@@ -152,15 +163,14 @@ autocmd FileType python     :UltiSnipsAddFiletypes python
 autocmd FileType qf set nobuflisted
 autocmd FileType ll set nobuflisted
 
-" set filetypes
-autocmd BufNewFile,BufRead *.less set filetype=less
-autocmd BufNewFile,BufRead *.js set filetype=javascript
-
 " set different indent style
 autocmd FileType javascript,html,css,less set tabstop=2 softtabstop=2 shiftwidth=2
 
 " reload .vimrc since it has been modified
 autocmd! bufwritepost .vimrc source %"
+
+" call ChangeBackground on startup
+autocmd VimEnter * :call ChangeBackground()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            Plugin Configuration                            "
@@ -212,7 +222,7 @@ let g:airline_powerline_fonts             = 1
 
 " Ternjs
 let tern#is_show_argument_hints_enabled = 1
-let g:tern_show_argument_hints   = 'on_move'
+let g:tern_show_argument_hints   = 'on_hold'
 let g:tern_show_signature_in_pum = 1
 
 " GitGutter
@@ -220,7 +230,7 @@ let g:gitgutter_realtime         = 1
 let g:gitgutter_eager            = 1
 
 " Javascript-libraries-syntax
-let g:used_javascript_libs       = 'jquery,react'
+let g:used_javascript_libs       = 'react'
 set omnifunc=syntaxcomplete#Complete
 
 " MultipleCursors
@@ -244,32 +254,6 @@ let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String']
 " NerdCommenter
 " Add a space before comment
 let g:NERDSpaceDelims=1
-
-" Rainbow Parentheses
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
 
 " CtrlP
 let g:ctrlp_map = '<leader>p'
@@ -342,7 +326,6 @@ Plugin 'tpope/vim-repeat'               " Use with vim-surround
 Plugin 'rking/ag.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kien/ctrlp.vim'
-Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'junegunn/vim-easy-align'
@@ -354,8 +337,8 @@ Plugin 'marijnh/tern_for_vim'           " auto complete for javascript
 
 " Syntax
 Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'othree/yajs.git'
 Plugin 'mxw/vim-jsx'
+" Plugin 'othree/yajs.vim'
 
 " Snippet
 Plugin 'SirVer/ultisnips'
