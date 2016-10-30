@@ -197,8 +197,8 @@ let g:ycm_filetype_blacklist                        = {
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger       = "<Tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<C-n>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-p>"
+let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-Tab>"
 
 " Airline
 let g:airline#extensions#tabline#enabled  = 1
@@ -338,12 +338,13 @@ Plugin 'marijnh/tern_for_vim'           " auto complete for javascript
 " Syntax
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'mxw/vim-jsx'
+Plugin 'pangloss/vim-javascript'
 " Plugin 'othree/yajs.vim'
 
 " Snippet
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'justinj/vim-react-snippets'
+Plugin 'bentayloruk/vim-react-es6-snippets'
 
 " Indent
 Plugin 'gavocanov/vim-js-indent'
