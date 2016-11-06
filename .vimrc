@@ -24,8 +24,12 @@ set wildmenu
 set winaltkeys=no
 set laststatus=2	" vim status bar
 set hidden
-set completeopt-=preview
+set completeopt=menu,longest
 set encoding=utf-8  " Encoding Setting
+set pastetoggle=<F5>
+set scrolloff=7
+set whichwrap+=<,>,h,l  " add <,>,h,l to move over lines
+set shiftround      " When use <,> to indent line, the width will be multiple of shiftwidth
 
 filetype plugin on
 filetype indent on
@@ -39,12 +43,6 @@ hi Comment ctermfg=red
 " colorscheme solarized
 " set background=dark
 
-" folding
-set foldenable 
-autocmd filetype python set foldmethod=indent
-set foldcolumn=0 
-set foldnestmax=2 
-nnoremap <space> za
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Functions                                  "
@@ -52,7 +50,7 @@ nnoremap <space> za
 
 let g:background_opacity = 1
 
-function BackgroundToggle()
+function ChangeBackground()
     echo "execute"
     if ! exists("g:background_opacity")
         return
@@ -89,12 +87,38 @@ nnoremap   <leader>q    :bdelete<CR>
 nnoremap   <leader>s    :w<CR>
 nnoremap   <leader>[    :lprevious<CR>
 nnoremap   <leader>]    :lnext<CR>
-nnoremap   <F12>        :NERDTreeToggle<CR>
+nnoremap   <leader>b    :call ChangeBackground()<CR>
 nnoremap   <F10>        :GitGutterLineHighlightsToggle<CR>
-nnoremap   <F5>         :SyntasticToggleMode<CR>
-nnoremap   <leader>b    :call BackgroundToggle()<CR>
+nnoremap   <F12>        :NERDTreeToggle<CR>
 
-set pastetoggle=<leader>p
+" Mapping for swap line cursor moving
+nnoremap   k            gk
+nnoremap   gk           k
+nnoremap   j            gj
+nnoremap   gj           j
+
+" Keep search pattern at the center of the screen.
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+
+" y$ -> Y Make Y behave like other capitals
+map Y y$
+
+" remap U to <C-r> for easier redo
+nnoremap U <C-r>
+
+" exchange #/* function
+nnoremap * #
+nnoremap # *
+
+nnoremap <silent><leader>/ :nohls<CR>
+
+" key mapping for folding
+nnoremap <space> za
+nnoremap <leader><space> zm
 
 " key mapping for adding comment to code
 autocmd filetype c      map <F7> :s/^/\/\//g<CR>
@@ -117,6 +141,10 @@ autocmd filetype sh     map <F9> :w<CR>:!bash %<CR>
 autocmd filetype perl   map <F9> :w<CR>:!perl %<CR>
 autocmd filetype python map <F9> :w<CR>:!`which python3.4` %<CR>
 
+" set filetypes
+autocmd BufNewFile,BufRead *.less set filetype=less
+autocmd BufNewFile,BufRead *.js set filetype=javascript
+
 " add filetype for Utilsnip
 autocmd FileType javascript :UltiSnipsAddFiletypes javascript
 autocmd FileType html       :UltiSnipsAddFiletypes html
@@ -128,18 +156,15 @@ autocmd FileType python     :UltiSnipsAddFiletypes python
 autocmd FileType qf set nobuflisted
 autocmd FileType ll set nobuflisted
 
-" set filetypes
-autocmd BufNewFile,BufRead *.less set filetype=less
-autocmd BufNewFile,BufRead *.js set filetype=javascript
-
 " set different indent style
-autocmd FileType javascript setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
-autocmd FileType html setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
-autocmd FileType css setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
-autocmd FileType less setlocal tabstop=2 | setlocal softtabstop=2 | setlocal shiftwidth=2
+autocmd FileType javascript,html,css,less set tabstop=2 softtabstop=2 shiftwidth=2
+
+" call ChangeBackground on startup
+autocmd VimEnter * :call ChangeBackground()
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                            Plugin Confiuration                             "
+"                            Plugin Configuration                            "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Jedi
@@ -163,8 +188,8 @@ let g:ycm_filetype_blacklist                        = {
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger       = "<Tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<C-n>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-p>"
+let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-Tab>"
 
 " Airline
 let g:airline#extensions#tabline#enabled  = 1
@@ -208,6 +233,42 @@ let g:indentLine_char = '¦'
 
 " JSX
 let g:jsx_ext_required = 0
+
+" Easy align
+vmap <Leader>a <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+if !exists('g:easy_align_delimiters')
+  let g:easy_align_delimiters = {}
+endif
+let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String']  }
+
+" NerdCommenter
+" Add a space before comment
+let g:NERDSpaceDelims=1
+
+" CtrlP
+let g:ctrlp_map = '<leader>p'
+let g:ctrlp_cmd = 'CtrlP'
+map <leader>f :CtrlPMRU<CR>
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
+
+" Easy Motion
+let g:EasyMotion_smartcase = 1
+map <Leader><leader>h <Plug>(easymotion-linebackward)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+map <Leader><leader>l <Plug>(easymotion-lineforward)
+" 重复上一次操作, 类似repeat插件, 很强大
+map <Leader><leader>. <Plug>(easymotion-repeat)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Others                                   "
@@ -255,7 +316,10 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-surround'             " Click ds, ysiw, cs to change surrounding quotation
 Plugin 'rking/ag.vim'
 Plugin 'jiangmiao/auto-pairs'
-" Plugin 'groenewege/vim-less'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'junegunn/vim-easy-align'
 
 " AutoComplete
 Plugin 'Valloric/YouCompleteMe'
@@ -264,13 +328,13 @@ Plugin 'marijnh/tern_for_vim'           " auto complete for javascript
 
 " Syntax
 Plugin 'othree/javascript-libraries-syntax.vim'
-" Plugin 'othree/yajs.git'
+Plugin 'othree/yajs.git'
 Plugin 'mxw/vim-jsx'
 
 " Snippet
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'justinj/vim-react-snippets'
+Plugin 'bentayloruk/vim-react-es6-snippets'
 
 " Indent
 Plugin 'gavocanov/vim-js-indent'
