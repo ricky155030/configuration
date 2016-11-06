@@ -188,7 +188,7 @@ let g:airline_powerline_fonts             = 1
 
 " Ternjs
 let tern#is_show_argument_hints_enabled = 1
-let g:tern_show_argument_hints   = 'on_move'
+let g:tern_show_argument_hints   = 'on_hold'
 let g:tern_show_signature_in_pum = 1
 
 " GitGutter
@@ -264,7 +264,7 @@ Plugin 'marijnh/tern_for_vim'           " auto complete for javascript
 
 " Syntax
 Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'othree/yajs.git'
+" Plugin 'othree/yajs.git'
 Plugin 'mxw/vim-jsx'
 
 " Snippet
