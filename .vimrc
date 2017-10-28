@@ -36,20 +36,10 @@ filetype indent on
 
 " Color scheme
 set t_Co=256
-colorscheme wombat256
-set background=light
 hi Comment ctermfg=red
-" syntax enable
-" colorscheme solarized
-" set background=dark
-
-" folding
-set foldenable 
-autocmd filetype python set foldmethod=indent
-autocmd filetype javascript set foldmethod=syntax
-set foldcolumn=0
-set foldnestmax=2
-set foldlevel=1
+syntax enable
+colorscheme gruvbox
+set background=dark
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 Functions                                  "
@@ -166,11 +156,9 @@ autocmd FileType ll set nobuflisted
 " set different indent style
 autocmd FileType javascript,html,css,less set tabstop=2 softtabstop=2 shiftwidth=2
 
-" reload .vimrc since it has been modified
-autocmd! bufwritepost .vimrc source %"
-
 " call ChangeBackground on startup
 autocmd VimEnter * :call ChangeBackground()
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            Plugin Configuration                            "
@@ -319,8 +307,6 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-fugitive'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-surround'             " Click ds, ysiw, cs to change surrounding quotation
 Plugin 'tpope/vim-repeat'               " Use with vim-surround
 Plugin 'rking/ag.vim'
@@ -332,20 +318,16 @@ Plugin 'junegunn/vim-easy-align'
 
 " AutoComplete
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'davidhalter/jedi-vim'           " auto complete for python
 Plugin 'marijnh/tern_for_vim'           " auto complete for javascript
 
 " Syntax
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'mxw/vim-jsx'
-Plugin 'pangloss/vim-javascript'
-" Plugin 'othree/yajs.vim'
+Plugin 'othree/yajs.vim'
 
 " Snippet
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'bentayloruk/vim-react-es6-snippets'
+Plugin 'epilande/vim-react-snippets'
 
 " Indent
 Plugin 'gavocanov/vim-js-indent'
-
