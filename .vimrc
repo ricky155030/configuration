@@ -36,8 +36,8 @@ filetype indent on
 
 " Color scheme
 set t_Co=256
+syntax on
 hi Comment ctermfg=red
-syntax enable
 colorscheme gruvbox
 set background=dark
 
@@ -117,27 +117,6 @@ nnoremap <silent><leader>/ :nohls<CR>
 nnoremap <space> za
 nnoremap <leader><space> zm
 
-" key mapping for adding comment to code
-autocmd filetype c      map <F7> :s/^/\/\//g<CR>
-autocmd filetype c      map <F8> :s/^\/\///g<CR>
-autocmd filetype cpp    map <F7> :s/^/\/\//g<CR>
-autocmd filetype cpp    map <F8> :s/^\/\///g<CR>
-autocmd filetype html   map <F7> :s/^\(.*\)$/<!--\1-->/g<CR>
-autocmd filetype html   map <F8> :s/^<!--\(.*\)-->$/\1/g<CR>
-autocmd filetype sh     map <F7> :s/^/# /g<CR>
-autocmd filetype sh     map <F8> :s/^# //g<CR>
-autocmd filetype perl   map <F7> :s/^/# /g<CR>
-autocmd filetype perl   map <F8> :s/^# //g<CR>
-autocmd filetype python map <F7> :s/^/# /g<CR>
-autocmd filetype python map <F8> :s/^# //g<CR>
-
-" key mapping for executing code
-autocmd filetype c      map <F9> :w<CR>:!gcc -lm % && ./a.out<CR>
-autocmd filetype cpp    map <F9> :w<CR>:make clean<CR>:make<CR>:!./a.out<CR>
-autocmd filetype sh     map <F9> :w<CR>:!bash %<CR>
-autocmd filetype perl   map <F9> :w<CR>:!perl %<CR>
-autocmd filetype python map <F9> :w<CR>:!`which python3.4` %<CR>
-
 " set filetypes
 autocmd BufNewFile,BufRead *.less set filetype=less
 autocmd BufNewFile,BufRead *.js set filetype=javascript
@@ -163,9 +142,6 @@ autocmd VimEnter * :call ChangeBackground()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                            Plugin Configuration                            "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Jedi
-let g:jedi#completions_enabled                      = 0
 
 " YouCompleteMe
 let g:ycm_min_num_of_chars_for_completion           = 2
@@ -195,19 +171,6 @@ let g:airline#extensions#hunks#enabled    = 1
 let g:airline#extensions#branch#enabled   = 1
 let g:airline_powerline_fonts             = 1
 
-" Syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list            = 1
-" let g:syntastic_check_on_open            = 0
-" let g:syntastic_check_on_wq              = 0
-" let g:syntastic_loc_list_height          = 5
-" let g:syntastic_python_checkers          = ['pylint']
-" let g:syntastic_html_checkers            = ['tidy']
-" let g:syntastic_javascript_checkers      = ['jshint']
-
 " Ternjs
 let tern#is_show_argument_hints_enabled = 1
 let g:tern_show_argument_hints   = 'on_hold'
@@ -231,32 +194,32 @@ let g:indentLine_char = '¦'
 " JSX
 let g:jsx_ext_required = 0
 
-" Easy align
-vmap <Leader>a <Plug>(EasyAlign)
-nmap <Leader>a <Plug>(EasyAlign)
-if !exists('g:easy_align_delimiters')
-  let g:easy_align_delimiters = {}
-endif
-let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String']  }
+"" " Easy align
+"" vmap <Leader>a <Plug>(EasyAlign)
+"" nmap <Leader>a <Plug>(EasyAlign)
+"" if !exists('g:easy_align_delimiters')
+""   let g:easy_align_delimiters = {}
+"" endif
+"" let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String']  }
 
-" NerdCommenter
-" Add a space before comment
-let g:NERDSpaceDelims=1
+"" " NerdCommenter
+"" " Add a space before comment
+"" let g:NERDSpaceDelims=1
 
-" CtrlP
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_cmd = 'CtrlP'
-map <leader>f :CtrlPMRU<CR>
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
+"" " CtrlP
+"" let g:ctrlp_map = '<leader>p'
+"" let g:ctrlp_cmd = 'CtrlP'
+"" map <leader>f :CtrlPMRU<CR>
+"" let g:ctrlp_custom_ignore = {
+""     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+""     \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+""     \ }
+"" let g:ctrlp_working_path_mode=0
+"" let g:ctrlp_match_window_bottom=1
+"" let g:ctrlp_max_height=15
+"" let g:ctrlp_match_window_reversed=0
+"" let g:ctrlp_mruf_max=500
+"" let g:ctrlp_follow_symlinks=1
 
 " Easy Motion
 let g:EasyMotion_smartcase = 1
@@ -279,55 +242,3 @@ if has("autocmd")
         \   exe "normal g'\"" |
         \ endif
 endif
-
-" vundle check
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-if !filereadable(vundle_readme)
-    echo "Installing Vundle.."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-    let iCanHazVundle=0
-endif
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Plugins                                   "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let Vundle manage Vundle
-" required! 
-Plugin 'gmarik/vundle'
-
-" git repo
-Plugin 'bling/vim-airline'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-fugitive'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-surround'             " Click ds, ysiw, cs to change surrounding quotation
-Plugin 'tpope/vim-repeat'               " Use with vim-surround
-Plugin 'rking/ag.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'kien/ctrlp.vim'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'junegunn/vim-easy-align'
-
-" AutoComplete
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'marijnh/tern_for_vim'           " auto complete for javascript
-
-" Syntax
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'othree/yajs.vim'
-
-" Snippet
-Plugin 'SirVer/ultisnips'
-Plugin 'epilande/vim-react-snippets'
-
-" Indent
-Plugin 'gavocanov/vim-js-indent'
