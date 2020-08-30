@@ -122,21 +122,23 @@ autocmd BufNewFile,BufRead *.less set filetype=less
 autocmd BufNewFile,BufRead *.js set filetype=javascript
 
 " add filetype for Utilsnip
-autocmd FileType javascript :UltiSnipsAddFiletypes javascript
-autocmd FileType html       :UltiSnipsAddFiletypes html
-autocmd FileType css        :UltiSnipsAddFiletypes css
-autocmd FileType less       :UltiSnipsAddFiletypes css
-autocmd FileType python     :UltiSnipsAddFiletypes python
+" autocmd FileType javascript :UltiSnipsAddFiletypes javascript
+" autocmd FileType html       :UltiSnipsAddFiletypes html
+" autocmd FileType css        :UltiSnipsAddFiletypes css
+" autocmd FileType less       :UltiSnipsAddFiletypes css
+" autocmd FileType python     :UltiSnipsAddFiletypes python
 
 " exclude from buffer next or prev
 autocmd FileType qf set nobuflisted
 autocmd FileType ll set nobuflisted
 
 " set different indent style
-autocmd FileType javascript,html,css,less set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType python,javascript,html,css,less set tabstop=2 softtabstop=2 shiftwidth=2
 
 " call ChangeBackground on startup
 autocmd VimEnter * :call ChangeBackground()
+
+autocmd filetype python nnoremap <F9> :w <bar> exec '!python '.shellescape('%')<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -193,33 +195,6 @@ let g:indentLine_char = '¦'
 
 " JSX
 let g:jsx_ext_required = 0
-
-"" " Easy align
-"" vmap <Leader>a <Plug>(EasyAlign)
-"" nmap <Leader>a <Plug>(EasyAlign)
-"" if !exists('g:easy_align_delimiters')
-""   let g:easy_align_delimiters = {}
-"" endif
-"" let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String']  }
-
-"" " NerdCommenter
-"" " Add a space before comment
-"" let g:NERDSpaceDelims=1
-
-"" " CtrlP
-"" let g:ctrlp_map = '<leader>p'
-"" let g:ctrlp_cmd = 'CtrlP'
-"" map <leader>f :CtrlPMRU<CR>
-"" let g:ctrlp_custom_ignore = {
-""     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-""     \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-""     \ }
-"" let g:ctrlp_working_path_mode=0
-"" let g:ctrlp_match_window_bottom=1
-"" let g:ctrlp_max_height=15
-"" let g:ctrlp_match_window_reversed=0
-"" let g:ctrlp_mruf_max=500
-"" let g:ctrlp_follow_symlinks=1
 
 " Easy Motion
 let g:EasyMotion_smartcase = 1
