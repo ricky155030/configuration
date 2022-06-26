@@ -138,7 +138,10 @@ autocmd FileType python,javascript,html,css,less set tabstop=2 softtabstop=2 shi
 " call ChangeBackground on startup
 autocmd VimEnter * :call ChangeBackground()
 
+autocmd filetype tcl nnoremap <F9> :w <bar> exec '!tclsh '.shellescape('%')<CR>
 autocmd filetype python nnoremap <F9> :w <bar> exec '!python '.shellescape('%')<CR>
+autocmd filetype c      nnoremap <F9> :w <bar> exec '!gcc '.shellescape('%').';./a.out'<CR>
+autocmd filetype cpp    nnoremap <F9> :w <bar> exec '!clear; clang++ --std=c++17 '.shellescape('%').';./a.out'<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -204,6 +207,28 @@ map <Leader><Leader>k <Plug>(easymotion-k)
 map <Leader><leader>l <Plug>(easymotion-lineforward)
 " 重复上一次操作, 类似repeat插件, 很强大
 map <Leader><leader>. <Plug>(easymotion-repeat)
+
+call plug#begin()
+Plug 'tpope/vim-fugitive'
+Plug 'jiangmiao/auto-pairs'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'easymotion/vim-easymotion'
+Plug 'airblade/vim-gitgutter'
+Plug 'ternjs/tern_for_vim'
+Plug 'jason0x43/vim-js-indent'
+Plug 'mxw/vim-jsx'
+Plug 'mlaursen/vim-react-snippets'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'othree/yajs.vim'
+Plug 'preservim/nerdtree'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+Plug 'junegunn/fzf.vim'
+call plug#end()
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Others                                   "
